@@ -1,0 +1,38 @@
+{% extends 'User/head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .event-card {
+            width: 18rem;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5 mb-4">Events List</h1>
+        <div class="row">
+            {% for event in data %}
+            <div class="col-md-4">
+                <div class="card event-card">
+                    <img src="{{ event.event_image.url }}" class="card-img-top" alt="Event Image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ event.event_title }}</h5>
+                        <p class="card-text">{{ event.event_description }}</p>
+                        <a href="{% url 'User:ViewEventsMore' eventid=event.id %}" class="btn btn-primary">View More</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
+{% endblock content %}

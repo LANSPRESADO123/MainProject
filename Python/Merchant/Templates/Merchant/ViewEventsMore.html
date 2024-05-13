@@ -1,0 +1,45 @@
+{% extends 'Merchant/head.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <style>
+        /* Add your custom styles here */
+        .event-details {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        .event-details img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="event-details">
+            <h2>{{ data.event_title }}</h2>
+            <img src="{{ data.event_image.url }}" alt="{{ data.event_title }}">
+            <p><strong>Description:</strong> {{ data.event_description }}</p>
+            <p><strong>Uploaded by:</strong> {{ data.merchant.merchant_name }}</p>
+            <p><strong>Date(From):</strong> {{ data.event_fromdate }}</p>
+            <p><strong>Date(To):</strong> {{ data.event_todate }}</p>
+            <p><strong>Time:</strong> {{ data.event_time }}</p>
+            <p><strong>Location:</strong> {{ data.event_location }}</p>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock content %}

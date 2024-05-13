@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary</title>
+</head>
+<body>
+    <table>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table border="2" align="center">
+                <tr>
+                    <td> First Name :</td>
+                    <td><input type="text" name="fname" id="fname" required></td>
+                </tr>
+                <tr>
+                    <td>Last Name :</td>
+                    <td><input type="text" name="lname" id="lname" required></td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td><input type="radio" name="gender" id="male" value="Male" checked>Male
+                    <input type="radio" name="gender" id="female" value="Female">Female</td>
+                </tr>
+                <tr>
+                    <td>Marital</td>
+                    <td><input type="radio" name="marital" id="single" value="Single" checked>Single
+                    <input type="radio" name="marital" id="married" value="Married">Married
+                    </td>
+                </tr>
+                <tr>
+                    <td>Department</td>
+                    <td> <select name="dept" id="dept">
+                        <option name="dept" value="select">----select----</option>
+                        <option name="dept" value="CS">CS </option>
+                        <option name="dept" value="Medical">Medical</option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td>Basic Salary</td>
+                    <td>
+                        <input type="number" name="bs" id="bs">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" name="btnsubmit" id="submit">
+                        <input type="reset" name="btnreset" id="reset" value="Cancel">
+                    </td>
+                </tr>
+            </table>
+            <br><br>
+
+            <table border="2" align="center">
+                <tr>
+                    <td>Name</td>
+                    <td> 
+                    {{result1}} </td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td> {{result2}} </td>
+                </tr>
+                <tr>
+                    <td>Marital Status</td>
+                    <td> {{result3}} </td>
+                </tr>
+                <tr>
+                    <td>Department</td>
+                    <td> {{result4}} </td>
+                </tr>
+                <tr>
+                    <td>Basic Salary</td>
+                    <td> {{result5}} </td>
+                </tr>
+                <tr>
+                    <td>T.A</td>
+                    <td> {{result6}} </td>
+                </tr>
+                <tr>
+                    <td>D.A</td>
+                    <td> {{result7}} </td>
+                </tr>
+                <tr>
+                    <td>HRA</td>
+                    <td> {{result8}} </td>
+                </tr>
+                <tr>
+                    <td>LIC</td>
+                    <td> {{result9}} </td>
+                </tr>
+                <tr>
+                    <td>PF</td>
+                    <td> {{result10}} </td>
+                </tr>
+                <tr>
+                    <td>Deduction</td>
+                    <td> {{result11}} </td>
+                </tr>
+                <tr>
+                    <td>NET</td>
+                    <td> {{result12}} </td>
+                </tr>
+            </table>
+        </form>
+    </table>
+</body>
+</html>

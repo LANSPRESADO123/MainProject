@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint</title>
+</head>
+<body>
+<form action="" method="post">
+    <br><br>
+    <h2 align="center">Complaints</h2>
+<table border="1" align="center">
+    <tr>
+        <td>Sl.No</td>
+        <td>Title</td>
+        <td>Complaint</td>
+        <td>POSTDate</td>
+        <td>UserName</td>
+        <td>Contact</td>
+        <td>Action</td>
+    </tr>
+    {% for i in data %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.complaint_title}}</td>
+        <td>{{i.complaint_details}}</td>
+        <td>{{i.complaint_postdate}}</td>
+        <td>{{i.user.user_name}}</td>
+        <td>{{i.user.user_contact}}</td>
+        <td><a href="{% url 'Nadmin:UserComplaintReply' cid=i.id %}">Reply</a></td>
+    </tr>
+    {% endfor %}
+</form>
+
+</table>
+</body>
+</html>

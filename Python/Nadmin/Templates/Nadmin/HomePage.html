@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <table>
+        <tr>
+            <a href="{% url 'Nadmin:my_pro' %}">Profile</a>
+        </tr>
+        <tr>
+            <td><a href="{% url 'Nadmin:districtInsertSelect' %}">District</a> </td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'Nadmin:placeInsertSelect' %}">Place</a> </td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'Nadmin:adminInsertSelect' %}">AdminRegistration</a> </td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'Nadmin:categoryInsertSelect' %}">Category</a> </td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'Nadmin:subcatInsertSelect' %}">SubCategory</a> </td>
+        </tr>
+
+        <!-- User -->
+
+        <tr>
+            <td><a href="{% url 'Nadmin:userListNew' %}">UserListNew</a></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'Nadmin:userListAccepted' %}">UserListAccepted</a></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'Nadmin:userListRejected' %}">UserListRejected</a></td>
+        </tr>
+
+        <!-- Merchant -->
+        <tr>
+            <td><a href="{% url 'Nadmin:merchantListNew' %}">MerchantListNew</a></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'Nadmin:merchantListAccepted' %}">MerchantListAccepted</a></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'Nadmin:merchantListRejected' %}">MerchantListRejected</a></td>
+        </tr>
+
+        <tr>
+            <td><a href="{% url 'Nadmin:UserComplaintListNew' %}">NewComplaints(USER)</a></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'Nadmin:UserComplaintSolved' %}">Solved Complaints </a></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'Nadmin:UserFeedbackNew' %}">FeedBacks</a></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'Nadmin:ViewAds' %}">Ads</a></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'User:ViewEvents' %}">Events</a><br></td>
+        </tr>
+    </table>
+</body>
+</html>

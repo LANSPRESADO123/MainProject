@@ -1,0 +1,444 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewUser</title>
+</head>
+<body>
+    <br><br>
+    <h2 align="center">User Registration</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table align="center">
+            <tr>
+                <td>District</td>
+                <td>
+                    <select name="sel_district" id="sel_district">
+                        <option value="">...Select...</option>
+                        {% for i in districtdata %}
+                        <option value="{{i.id}}">{{i.district_name}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Place</td>
+                <td>
+                    <select name="sel_place" id="sel_place">
+                        <option value="">...Select...</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="txtname" placeholder="Enter Name" required ></td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td>
+                    <input type="radio" name="gender" value="Male" >Male
+                    <input type="radio" name="gender" value="Female" >Female
+                </td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td><input type="text" name="txtcontact" placeholder="Enter Contact" required ></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="email" name="txtemail" placeholder="Enter Email" required ></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="txtpwd" placeholder="Enter Password" required ></td>
+            </tr>
+            <tr>
+                <td>Photo</td>
+                <td><input type="file" name="fileImage"  required ></td>
+            </tr>
+            <tr>
+                <td>Proof</td>
+                <td><input type="file" name="fileProof"  required ></td>
+            </tr>
+            <tr>
+                
+                <td colspan="2" align="center">
+                    <input type="submit" name="btnsubmit" value="Save">
+                    <input type="reset" name="btncancel" value="Cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    
+
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#sel_district").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'Guest:ajaxplace' %}"
+        $.ajax({
+            url: ur,
+            data: { did: did, },
+            success: function (data) {
+                $("#sel_place").html(data);
+            },
+        });
+    });
+</script>
+<script>
+    console.log('Using jQuery version:', $.fn.jquery);
+</script> -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>User Registration</title>
+
+    <!-- Font Icon -->
+    <link
+      rel="stylesheet"
+      href="{% static 'Register/fonts/material-icon/css/material-design-iconic-font.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'Register/vendor/nouislider/nouislider.min.css' %}"
+    />
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'Register/css/style.css' %}" />
+    <style>
+      body {
+        zoom: 100%;
+      }
+      .container {
+        width: 1000px;
+        margin: 0 auto;
+        background: #fff;
+      }
+      .signup-img {
+        position: relative;
+        width: 485px;
+        margin-bottom: -8px;
+      }
+
+      /* Styling the Dropdown Arrow */
+      #sel_district,
+      #sel_place {
+        appearance: none; /* Removes default arrow */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: url('{% static "Register/iimages/drop-down-arrow.png" %}'); /* Custom arrow image */
+        background-repeat: no-repeat;
+        background-position: calc(100% - 20px) center;
+        padding-right: 20px; /* Adjust as needed */
+      }
+
+      /* Styling the Dropdown Options */
+      #sel_district option,
+      #sel_place option {
+        background-color: #fff; /* Background color of options */
+        color: #333; /* Text color of options */
+        padding: 10px 15px; /* Adjust as needed */
+      }
+
+      /* Styling the Selected Option */
+      #sel_district option:checked,
+      #sel_place option:checked {
+        background-color: #f0f0f0; /* Background color of selected option */
+        font-weight: bold; /* Bold font for selected option */
+      }
+
+      /* Customizing the Dropdown Border and Background */
+      #sel_district,
+      #sel_place {
+        border: 1px solid #ccc; /* Border color */
+        background-color: #fff; /* Background color */
+        border-radius: 5px; /* Border radius */
+        padding: 10px; /* Adjust as needed */
+        width: 200px; /* Width of the dropdown */
+      }
+
+      /* Styling the Textarea */
+      .form-input textarea {
+        width: 100%;
+        height: 150px;
+        padding: 12px 20px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        font-size: 16px;
+        resize: none;
+      }
+
+      /* Style for when textarea is focused */
+      .form-input textarea:focus {
+        border-color: #23b499; /* Change border color when focused */
+        outline: none; /* Remove default focus outline */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="container">
+        <div class="signup-content">
+          <div class="signup-img">
+            <img src="{% static 'Register/images/register.jpg' %}" alt="" />
+            <div class="signup-img-content">
+              <h2>Register now</h2>
+              <p>Become a User</p>
+            </div>
+          </div>
+          <div class="signup-form">
+            <form
+              method="POST"
+              class="register-form"
+              id="register-form"
+              enctype="multipart/form-data"
+            >
+              {% csrf_token %}
+              <div class="form-row">
+                <div class="form-group">
+                  <div class="form-input">
+                    <label for="txtname">Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="txtname"
+                      name="txtname"
+                    />
+                  </div>
+                  <div class="form-input">
+                    <label for="txtcontact">Contact</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="txtcontact"
+                      name="txtcontact"
+                      required
+                    />
+                  </div>
+                  <div class="form-input">
+                    <label for="txtemail">Email</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="txtemail"
+                      name="txtemail"
+                      required
+                    />
+                  </div>
+                  <div class="form-input">
+                    <label for="txtpwd">Password</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="txtpwd"
+                      name="txtpwd"
+                      required
+                    />
+                  </div>
+                  <div class="form-input">
+                    <label for="fileImage">Image</label>
+                    <input
+                      type="file"
+                      class="form-control-file"
+                      id="fileImage"
+                      name="fileImage"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <!-- District Selection -->
+                  <div class="form-select">
+                    <div class="label-flex">
+                      <label for="sel_district">District</label>
+                    </div>
+                    <div class="select-list">
+                      <select id="sel_district" name="sel_district">
+                        <option value="District">Select District</option>
+                        {% for district in districtdata %}
+                        <option value="{{ district.id }}">
+                          {{ district.district_name }}
+                        </option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                  <!-- Place Selection -->
+                  <div class="form-select">
+                    <div class="label-flex">
+                      <label for="sel_place">Place</label>
+                    </div>
+                    <div class="select-list">
+                      <select id="sel_place" name="sel_place">
+                        <option value="">Select Place</option>
+                        <!-- <option value="Place">Select Place</option>
+                                            <option value="">...Select...</option> -->
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-radio">
+                    <div class="label-flex">
+                      <label for="gender">Gender</label>
+                    </div>
+                    <div class="form-radio-group">
+                      <div class="form-radio-item">
+                        <input
+                          type="radio"
+                          name="gender"
+                          id="male"
+                          value="Male"
+                          checked
+                        />
+                        <label for="male">Male</label>
+                        <span class="check"></span>
+                      </div>
+                      <div class="form-radio-item">
+                        <input
+                          type="radio"
+                          name="gender"
+                          id="female"
+                          value="Female"
+                        />
+                        <label for="female">Female</label>
+                        <span class="check"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div> <br> <br> </div>
+                  <div class="form-input">
+                    <label for="fileProof">Proof</label>
+                    <input
+                      type="file"
+                      class="form-control-file"
+                      id="fileProof"
+                      name="fileProof"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div><br></div>
+              <div class="form-submit">
+                <input
+                  type="submit"
+                  value="Submit"
+                  class="submit"
+                  id="submit"
+                  name="submit"
+                />
+                <input
+                  type="reset"
+                  value="Reset"
+                  class="submit"
+                  id="reset"
+                  name="reset"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script src="{% static 'Register/vendor/jquery/jquery.min.js' %}"></script>
+    <!-- <script src="{% static 'Register/js/jquery.min.js' %}"></script> -->
+    <script src="{% static 'Register/vendor/nouislider/nouislider.min.js' %}"></script>
+    <script src="{% static 'Register/vendor/wnumb/wNumb.js' %}"></script>
+    <script src="{% static 'Register/vendor/jquery-validation/dist/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'Register/vendor/jquery-validation/dist/additional-methods.min.js' %}"></script>
+    <script src="{% static 'Register/js/main.js' %}"></script>
+
+    <!-- Remove the old jQuery version -->
+    <!-- <script src="{% static 'Register/vendor/jquery/jquery.min.js' %}"></script> -->
+
+    <!-- Add the new jQuery version -->
+    <!-- AJAX for Place Selection -->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+
+    <script>
+      $(document).ready(function () {
+        // Function to fetch places based on selected district
+        $(document).on("change", "#sel_district", function () {
+          var did = $(this).val();
+          var ur = "{% url 'Guest:ajaxplace' %}";
+          $.ajax({
+            url: ur,
+            data: { did: did },
+            success: function (data) {
+              $("#sel_place").html(data);
+            },
+          });
+        });
+      });
+    </script>
+
+    <script>
+      //   console.log("Event binding for district selection");
+      //   $("#sel_district").change(function () {
+      //       console.log("District selection changed");
+      //       var did = $(this).val();
+      //       console.log("Data to be sent:", { did: did });
+      //       var ur = "{% url 'Guest:ajaxplace' %}"
+      //       $.ajax({
+      //           url: ur,
+      //           data: { did: did, },
+      //           success: function (data) {
+      //               console.log("AJAX request successful");
+      //               console.log("Data received:", data);
+      //               $("#sel_place").html(data);
+      //           },
+      //           error: function (xhr, status, error) {
+      //           console.log("AJAX request failed:", error);
+      //       }
+      //       });
+      //   });
+      //   $(document).ready(function () {
+      //     console.log("Event binding for district selection");
+      //     $("#sel_district").change(function () {
+      //       console.log("District selection changed");
+      //       var did = $(this).val();
+      //       console.log("Data to be sent:", { did: did });
+      //       var ur = "{% url 'Guest:ajaxplace' %}"; // Replace with the actual path to your AJAX endpoint
+
+      //       $.ajax({
+      //         url: ur,
+      //         data: { did: did },
+      //         dataType: "json", // Expecting JSON data
+      //         success: function (data) {
+      //           console.log("AJAX request successful");
+      //           console.log("Data received:", data);
+      //           var options = "";
+      //           $.each(data, function (index, item) {
+      //             options +=
+      //               '<option value="' +
+      //               item.id +
+      //               '">' +
+      //               item.place_name +
+      //               "</option>";
+      //           });
+      //           $("#sel_place").html(options);
+      //         },
+      //         error: function (xhr, status, error) {
+      //           console.log("AJAX request failed:", error);
+      //         },
+      //       });
+      //     });
+      //   });
+      //
+    </script>
+  </body>
+</html>

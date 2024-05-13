@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <br><br>
+    <h2 align="center">User Details</h2>
+    <form action="" method="post">
+        <table border="1" align="center" cellpadding="10">
+        <tr>
+            <th>Sl.No</th>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Gender</th>
+            <th>Photo</th>
+            <th>Proof</th>
+            <th>District</th>
+            <th>Place</th>
+            <th>Action</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.user_name}}</td>
+            <td>{{i.user_contact}}</td>
+            <td>{{i.user_email}}</td>
+            <td>{{i.user_password}}</td>
+            <td>{{i.user_gender}}</td>
+            <td>{{i.user_photo}}</td>
+            <td>{{i.user_proof}}</td>
+            <td>{{i.place.district.district_name}}</td>
+            <td>{{i.place.place_name}}</td>
+            <td>
+                <a href="{% url 'Nadmin:delUser' i.id %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    </form>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category</title>
+</head>
+<body>
+    <form action="" method="post">
+        <table border="2" align="center">
+            {% csrf_token %}
+            <tr>
+                <th>
+                    Category
+                </th>
+                <td>
+                    <input type="text" name="categoryname" id="category" value="{{editdata.category_name}}">
+                </td>
+            </tr>
+            <tr>
+               <td colspan="2" align="center">
+                <input type="submit" name="btnsubmit" value="Save">
+                <input type="reset" name="btncancel" value="Cancel">
+               </td> 
+            </tr>
+        </table>
+        <table border="1" align="center">
+            <tr>
+                <td>Sl.No</td>
+                <td>Category</td>
+                <td>Action</td>
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.category_name}}</td>
+                <td>
+                    <a href="{% url 'Nadmin:delCategory' i.id %}">Delete</a>
+                    <a href="{% url 'Nadmin:categoryupdate' i.id %}">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>

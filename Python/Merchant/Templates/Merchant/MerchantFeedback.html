@@ -1,0 +1,44 @@
+{% extends 'Merchant/head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <br><br><br><br>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <h2 class="text-center mb-4">Post Feedback</h2>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="txtsubject">Subject</label>
+                        <input type="text" class="form-control" id="txtsubject" name="txtsubject" placeholder="Enter Feedback Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtfeedback">Feedback</label>
+                        <textarea class="form-control" id="txtfeedback" name="txtfeedback" rows="3"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary mr-2" name="btnsubmit">Save</button>
+                        <button type="reset" class="btn btn-secondary" name="btncancel">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <br><br><br><br><br><br><br><br>
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location</title>
+</head>
+<body>
+    <h2 align="center" >District</h2>
+    <form action="" method="post">
+        <table border="1" align="center">
+            <tr>
+                <td>District</td>
+                <td>
+                    <select name="sel_district" id="sel_district">
+                    <option value="">-----Select-----</option>
+                    {% for i in  districtdata %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Place</td>
+                <td>
+                    <select name="sel_place" id="sel_place">
+                    <option value="">-----Select-----</option>
+                    {% for i in  placedata %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Location
+                </td>
+            </tr>
+            <tr>
+                <td><input type="text" name="locname" placeholder="Enter Location" required value="{{editdata.location_name}}"></td>
+            </tr>
+            <tr>
+                
+                <td colspan="2" align="center">
+                    <input type="submit" name="btnsubmit" value="Save">
+                    <input type="reset" name="btncancel" value="Cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+    
+</body>

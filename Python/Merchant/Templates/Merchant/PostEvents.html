@@ -1,0 +1,149 @@
+{% extends 'Merchant/head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .event-card {
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Post Events</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="eventtitle">Title</label>
+                        <input type="text" class="form-control" id="eventtitle" name="eventtitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventdescription">Description</label>
+                        <textarea class="form-control" id="eventdescription" name="eventdescription" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventimage">Image</label>
+                        <input type="file" class="form-control-file" id="eventimage" name="eventimage" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="eventfromdate">Date(From)</label>
+                            <input type="date" class="form-control" id="eventfromdate" name="eventfromdate">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="eventtodate">Date(To)</label>
+                            <input type="date" class="form-control" id="eventtodate" name="eventtodate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventtime">Time</label>
+                        <input type="time" class="form-control" id="eventtime" name="eventtime">
+                    </div>
+                    <div class="form-group">
+                        <label for="sel_district">District</label>
+                        <select class="form-control" id="sel_district" name="sel_district">
+                            <option value="">...Select...</option>
+                            {% for district in districtdata %}
+                            <option value="{{ district.id }}">{{ district.district_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sel_place">Place</label>
+                        <select class="form-control" id="sel_place" name="sel_place">
+                            <option value="">...Select...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sel_category">Category</label>
+                        <select class="form-control" id="sel_category" name="sel_category">
+                            <option value="">...Select...</option>
+                            {% for category in categorydata %}
+                            <option value="{{ category.id }}">{{ category.category_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sel_subcat">SubCategory</label>
+                        <select class="form-control" id="sel_subcat" name="sel_subcat">
+                            <option value="">...Select...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventlocation">Location</label>
+                        <input type="text" class="form-control" id="eventlocation" name="eventlocation">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Post Event</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            {% for event in data %}
+            <div class="col-md-4 mb-4"> <!-- Adjust the column width as needed -->
+                <div class="event-card">
+                    <h3>{{ event.event_title }}</h3>
+                    <p>{{ event.event_description }}</p>    
+                    <img src="{{ event.event_image.url }}" alt="{{ event.event_title }}" class="img-fluid">
+                    <div>Date(From): {{ event.event_fromdate }}</div>
+                    <div>Date(To): {{ event.event_todate }}</div>
+                    <div>Time: {{ event.event_time }}</div>
+                    <div>Location: {{ event.event_location }}</div>
+                    <a href="{% url 'Merchant:delEvent' event.id %}" class="btn btn-danger mt-2">Delete</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Ajax Script -->
+    <script>
+        $(document).ready(function () {
+            // Function to fetch places based on selected district
+            $(document).on('change', '#sel_district', function () {
+                var did = $(this).val();
+                var ur = "{% url 'Guest:ajaxplace' %}";
+                $.ajax({
+                    url: ur,
+                    data: { did: did },
+                    success: function (data) {
+                        $("#sel_place").html(data);
+                    },
+                });
+            });
+    
+            // Function to fetch subcategories based on selected category
+            $(document).on('change', '#sel_category', function () {
+                var cid = $(this).val();
+                var ur = "{% url 'Merchant:Ajaxsubcategory' %}";
+                $.ajax({
+                    url: ur,
+                    data: { did: cid },  // Change 'cid' to 'did' if your view expects 'did'
+                    success: function (data) {
+                        $("#sel_subcat").html(data);
+                    },
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+{% endblock content %}

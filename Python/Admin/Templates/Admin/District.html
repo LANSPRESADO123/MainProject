@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>District</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <br>
+
+        <table border="2" align="center">
+            <tr>
+                <td>District</td>
+                <td><input type="text" name="dist" id="dist" placeholder="Enter the District"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" name="btn" id="btn">
+                </td>
+            </tr>
+            <br><br>
+            <table border="2" align="center" style="margin-top: 20px;">
+                <tr>
+                    <td>District</td>
+                    <td> {{result}} </td>
+                </tr>
+            </table>
+        </table>
+    </form>
+</body>
+</html>

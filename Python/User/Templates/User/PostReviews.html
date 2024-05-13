@@ -1,0 +1,31 @@
+{% extends 'User/head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Review</title>
+</head>
+<body>
+    <table border="0" cellspacing="10" cellpadding="0" align="center">
+        <br><br>
+        <h2 align="center">Post Your Reviews</h2>
+        <br>
+        <tr>
+            <td>Rating:</td>
+            <td><input type="number" name="rating" min="1" max="5"></td>
+        </tr>
+        <tr>
+            <td>Comment:</td>
+            <td><textarea name="comment" rows="4" cols="30"></textarea></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><button type="submit">Submit Review</button></td>
+        </tr>
+    </table>
+</body>
+</html>
+{% endblock content %}

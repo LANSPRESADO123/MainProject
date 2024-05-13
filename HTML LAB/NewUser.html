@@ -1,0 +1,156 @@
+<html>
+    <head>
+        <title>
+            New User
+        </title>
+    </head>
+    <body>
+        <br><br>
+        <h2 align="center"><b><u>NEW USER</u></b></h2>
+        <br><br>
+        <form name="frmnewuser" method="post">
+        <table border="1" align="center">
+            <tr>
+                <th>
+                    First Name
+                </th>
+                <td>
+                    <input type="text" name="txtfname" required placeholder="Enter FirstName">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Last Name
+                </th>
+                <td>
+                    <input type="text" name="txtlname" required placeholder="Enter LastName">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Gender
+                </th>
+                <td>
+                    <input type="radio" name="Gender" value="Male" checked>Male
+                    <input type="radio" name="Gender" value="Female">Female
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Marital status
+                </th>
+                <td>
+                    <input type="radio" name="Marital" value="Single" checked>Single
+                    <input type="radio" name="Marital" value="Married">Married
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    District
+                </th>
+                <td>
+                    <select name="District" id="dist">
+                        <option value="select">-----Select------</option>
+                        <option value="">Thrissur</option>
+                        <option value="">Ernakulam</option>
+                        <option value="">Kottayam</option>
+                        <option value="">Kollam</option>
+                        <option value="">Trivandrum</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Place
+                </th>
+                <td>
+                    <select name="Place" id="Place">
+                        <option value="select">-----Select------</option>
+                        <option value="Kothamangalam">Kothamangalam</option>
+                        <option value="">Thriprayar</option>
+                        <option value="">Karunagappally</option>
+                        <option value="">Aluva</option>
+                        <option value="">Ettumanoor</option>
+                        <option value="">Thiruvalla</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Pincode
+                </th>
+                <td>
+                    <input type="text" name="txtpincode" required placeholder="Enter pincode">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Contact
+                </th>
+                <td>
+                    <input type="tel" name="contact" required placeholder="Enter phone number">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Email
+                </th>
+                <td>
+                    <input type="email" name="email" required placeholder="Enter Email">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Password
+                </th>
+                <td>
+                    <input type="password" name="pswd" required placeholder="Enter password">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Confirm
+                </th>
+                <td>
+                    <input type="password" name="pswd" required placeholder="Re-enter password">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Address
+                </th>
+                <td>
+                    <textarea name="address" id="addrs" cols="20" rows="4" placeholder="Enter your current address"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    DOB
+                </th>
+                <td>
+                    <input type="date" name="date" required>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Image
+                </th>
+                <td>
+                    <input type="file" name="fileimage" required>
+                </td>
+            </tr>
+            <tr>
+               <td colspan="2">
+                <input type="checkbox" required name="tos" >I accept the terms and conditions
+               </td> 
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" name="btnsave" value="Save">
+                    <input type="reset" name="btnreset" value="Reset">
+                </td>
+            </tr>
+        </table>
+        </form>
+    </body>
+</html>

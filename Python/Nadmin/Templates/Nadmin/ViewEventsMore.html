@@ -1,0 +1,67 @@
+{% extends 'Nadmin/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center">{{ data.event_title }}</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center">
+                            <img src="{{ data.event_image.url }}" alt="" class="img-thumbnail">
+                        </div>
+                        <div class="mt-3">
+                            <!-- <h5>Description</h5> -->
+                            <p>{{ data.event_description }}</p>
+                        </div>
+                        <div class="table-responsive mt-3">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Uploaded by</th>
+                                        <td>{{ data.merchant.merchant_name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Date(From)</th>
+                                        <td>{{ data.event_fromdate }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Date(to)</th>
+                                        <td>{{ data.event_todate }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Time</th>
+                                        <td>{{ data.event_time }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Location</th>
+                                        <td>{{ data.event_location }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,19 @@
+{% extends 'User/head.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <br><br><br><br><br>
+            
+            <h2 align="center">Merchant </h2>
+            <img src="{{ merchant.merchant_photo.url }}" alt="" width="150" height="150" class="rounded-circle mx-auto d-block mb-3">
+            <p><strong>Name:</strong> {{ merchant.merchant_name }}</p>
+            <p><strong>Contact:</strong> {{ merchant.merchant_contact }}</p>
+            <p><strong>Email:</strong> {{ merchant.merchant_email }}</p>
+            <a href="{% url 'User:chatpage' merchant.id %}" class="btn btn-primary">Chat with Merchant</a>
+            <br><br><br><br><br>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

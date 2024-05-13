@@ -1,0 +1,19 @@
+{% extends 'User/head.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <br><br><br><br><br>
+            
+            <h2 align="center">User </h2>
+            <img src="{{ user.user_photo.url }}" alt="" width="150" height="150" class="rounded-circle mx-auto d-block mb-3">
+            <p><strong>Name:</strong> {{ user.user_name }}</p>
+            <p><strong>Contact:</strong> {{ user.user_contact }}</p>
+            <p><strong>Email:</strong> {{ user.user_email }}</p>
+            <a href="{% url 'User:chatpage' user.id %}" class="btn btn-primary">Chat with User</a>
+            <br><br><br><br><br>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

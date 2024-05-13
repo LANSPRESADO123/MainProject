@@ -1,0 +1,52 @@
+
+{% extends 'User/head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile</title>
+  <link href="{% static 'Main/assets/css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+
+<body>
+  <br><br><br><br><br><br>
+  <div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 bg-image">
+    <div class="card d-profile w-50">
+      <div class="card-body text-center">
+        <img src="{{ data.user_photo.url }}" alt="" width="150" height="150" class="rounded-circle mx-auto d-block mb-3">
+        <table class="table table-borderless mb-0">
+          <tbody>
+            <tr>
+              <th scope="row">Name</th>
+              <td>{{ data.user_name }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Contact</th>
+              <td>{{ data.user_contact }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Email</th>
+              <td>{{ data.user_email }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-center mt-4">
+          <a href="{% url 'User:editprofile' %}" class="btn btn-primary d-card-button btn-xs">Edit Profile</a> &nbsp;
+          <a href="{% url 'User:changepassword' %}" class="btn btn-outline-primary ms-2 d-card-button">Change Password</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{% static 'Main/assets/js/bootstrap.min.js' %}" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <br><br><br><br><br><br>
+</body>
+
+
+</html>
+{% endblock content %}

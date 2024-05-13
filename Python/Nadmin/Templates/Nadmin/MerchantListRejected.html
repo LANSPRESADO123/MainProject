@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <br><br>
+    <h2 align="center">Merchant Details</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table border="1" align="center" cellpadding="10">
+        <tr>
+            <th>Sl.No</th>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Gender</th>
+            <th>Shop Name</th>
+            <th>License Number</th>
+            <th>Image</th>
+            <th>Address</th>
+            <th>DOB</th>
+            <th>District</th>
+            <th>Place</th>
+            <th>Action</th>
+        </tr>
+        {% for i in merchantdata %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.merchant_name}}</td>
+            <td>{{i.merchant_contact}}</td>
+            <td>{{i.merchant_email}}</td>
+            <td>{{i.merchant_password}}</td>
+            <td>{{i.merchant_gender}}</td>
+            <td>{{i.merchant_shopname}}</td>
+            <td>{{i.merchant_license}}</td>
+            <td><img src="{{i.merchant_photo.url}}" width="150" height="150" alt=""></td>
+            <td>{{i.merchant_address}}</td>
+            <td>{{i.merchant_dob}}</td>
+            <td>{{i.place.district.district_name}}</td>
+            <td>{{i.place.place_name}}</td>
+            <td>
+                <a href="{% url 'Nadmin:acceptmerchant' i.id %}">Accept</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    </form>
+</body>
+</html>

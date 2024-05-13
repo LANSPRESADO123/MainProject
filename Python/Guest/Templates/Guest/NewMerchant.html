@@ -1,0 +1,360 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Merchant Registration</title>
+
+    <!-- Font Icon -->
+    <link
+      rel="stylesheet"
+      href="{% static 'Register/fonts/material-icon/css/material-design-iconic-font.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'Register/vendor/nouislider/nouislider.min.css' %}"
+    />
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'Register/css/style.css' %}" />
+    <style>
+      /* Styling the Dropdown Arrow */
+      #sel_district,
+      #sel_place {
+        appearance: none; /* Removes default arrow */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: url('{% static "Register/iimages/drop-down-arrow.png" %}'); /* Custom arrow image */
+        background-repeat: no-repeat;
+        background-position: calc(100% - 20px) center;
+        padding-right: 20px; /* Adjust as needed */
+      }
+
+      /* Styling the Dropdown Options */
+      #sel_district option,
+      #sel_place option {
+        background-color: #fff; /* Background color of options */
+        color: #333; /* Text color of options */
+        padding: 10px 15px; /* Adjust as needed */
+      }
+
+      /* Styling the Selected Option */
+      #sel_district option:checked,
+      #sel_place option:checked {
+        background-color: #f0f0f0; /* Background color of selected option */
+        font-weight: bold; /* Bold font for selected option */
+      }
+
+      /* Customizing the Dropdown Border and Background */
+      #sel_district,
+      #sel_place {
+        border: 1px solid #ccc; /* Border color */
+        background-color: #fff; /* Background color */
+        border-radius: 5px; /* Border radius */
+        padding: 10px; /* Adjust as needed */
+        width: 200px; /* Width of the dropdown */
+      }
+
+      /* Styling the Textarea */
+      .form-input textarea {
+        width: 100%;
+        height: 150px;
+        padding: 12px 20px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        font-size: 16px;
+        resize: none;
+      }
+
+      /* Style for when textarea is focused */
+      .form-input textarea:focus {
+        border-color: #23b499; /* Change border color when focused */
+        outline: none; /* Remove default focus outline */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="container">
+        <div class="signup-content">
+          <div class="signup-img">
+            <img src="{% static 'Register/images/register.jpg' %}" alt="" />
+            <div class="signup-img-content">
+              <h2>Register now</h2>
+              <p>Become a Merchant</p>
+            </div>
+          </div>
+          <div class="signup-form">
+            <form method="POST" class="register-form" id="register-form" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-row">
+                <div class="form-group">
+                  <div class="form-input">
+                    <label for="merchantname">Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="merchantname"
+                      name="merchantname"
+                    />
+                  </div>
+                  <div class="form-input">
+                    <label for="merchantcontact">Contact</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="merchantcontact"
+                      name="merchantcontact"
+                      required
+                    />
+                  </div>
+                  <div class="form-input">
+                    <label for="merchantemail">Email</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="merchantemail"
+                      name="merchantemail"
+                      required
+                    />
+                  </div>
+                  <div class="form-input">
+                    <label for="merchantpassword">Password</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="merchantpassword"
+                      name="merchantpassword"
+                      required
+                    />
+                  </div>
+                  <div class="form-input">
+                    <label for="shopname">Shop Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="shopname"
+                      name="shopname"
+                      required
+                    />
+                  </div>
+                  <div class="form-input">
+                    <label for="merchantaddress">Address</label>
+                    <textarea
+                      class="form-control"
+                      id="merchantaddress"
+                      name="merchantaddress"
+                      rows="3"
+                      required
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <!-- District Selection -->
+                  <div class="form-select">
+                    <div class="label-flex">
+                      <label for="sel_district">District</label>
+                    </div>
+                    <div class="select-list">
+                      <select id="sel_district" name="sel_district">
+                        <option value="District">Select District</option>
+                        {% for district in districtdata %}
+                        <option value="{{ district.id }}">
+                          {{ district.district_name }}
+                        </option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                  <!-- Place Selection -->
+                  <div class="form-select">
+                    <div class="label-flex">
+                      <label for="sel_place">Place</label>
+                    </div>
+                    <div class="select-list">
+                      <select id="sel_place" name="sel_place">
+                        <option value="">Select Place</option>
+                        <!-- <option value="Place">Select Place</option>
+                                            <option value="">...Select...</option> -->
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-radio">
+                    <div class="label-flex">
+                      <label for="merchantgender">Gender</label>
+                    </div>
+                    <div class="form-radio-group">
+                      <div class="form-radio-item">
+                        <input
+                          type="radio"
+                          name="merchantgender"
+                          id="male"
+                          value="Male"
+                          checked
+                        />
+                        <label for="male">Male</label>
+                        <span class="check"></span>
+                      </div>
+                      <div class="form-radio-item">
+                        <input
+                          type="radio"
+                          name="merchantgender"
+                          id="female"
+                          value="Female"
+                        />
+                        <label for="female">Female</label>
+                        <span class="check"></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-input">
+                    <label for="merchantlicense">License Number</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="merchantlicense"
+                      name="merchantlicense"
+                      required
+                    />
+                  </div>
+                  <div class="form-input">
+                    <label for="merchantimage">Image</label>
+                    <input
+                      type="file"
+                      class="form-control-file"
+                      id="merchantimage"
+                      name="merchantimage"
+                      required
+                    />
+                  </div>
+                  <div class="form-input">
+                    <label for="dob">Date of Birth</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="dob"
+                      name="dob"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-submit">
+                <input
+                  type="submit"
+                  value="Submit"
+                  class="submit"
+                  id="submit"
+                  name="submit"
+                />
+                <input
+                  type="submit"
+                  value="Reset"
+                  class="submit"
+                  id="reset"
+                  name="reset"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script src="{% static 'Register/vendor/jquery/jquery.min.js' %}"></script>
+    <!-- <script src="{% static 'Register/js/jquery.min.js' %}"></script> -->
+    <script src="{% static 'Register/vendor/nouislider/nouislider.min.js' %}"></script>
+    <script src="{% static 'Register/vendor/wnumb/wNumb.js' %}"></script>
+    <script src="{% static 'Register/vendor/jquery-validation/dist/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'Register/vendor/jquery-validation/dist/additional-methods.min.js' %}"></script>
+    <script src="{% static 'Register/js/main.js' %}"></script>
+
+    <!-- Remove the old jQuery version -->
+    <!-- <script src="{% static 'Register/vendor/jquery/jquery.min.js' %}"></script> -->
+
+    <!-- Add the new jQuery version -->
+    <!-- AJAX for Place Selection -->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+
+    <script>
+      $(document).ready(function () {
+        // Function to fetch places based on selected district
+        $(document).on("change", "#sel_district", function () {
+          var did = $(this).val();
+          var ur = "{% url 'Guest:ajaxplace' %}";
+          $.ajax({
+            url: ur,
+            data: { did: did },
+            success: function (data) {
+              $("#sel_place").html(data);
+            },
+          });
+        });
+      });
+    </script>
+
+    <script>
+      //   console.log("Event binding for district selection");
+      //   $("#sel_district").change(function () {
+      //       console.log("District selection changed");
+      //       var did = $(this).val();
+      //       console.log("Data to be sent:", { did: did });
+      //       var ur = "{% url 'Guest:ajaxplace' %}"
+      //       $.ajax({
+      //           url: ur,
+      //           data: { did: did, },
+      //           success: function (data) {
+      //               console.log("AJAX request successful");
+      //               console.log("Data received:", data);
+      //               $("#sel_place").html(data);
+      //           },
+      //           error: function (xhr, status, error) {
+      //           console.log("AJAX request failed:", error);
+      //       }
+      //       });
+      //   });
+      //   $(document).ready(function () {
+      //     console.log("Event binding for district selection");
+      //     $("#sel_district").change(function () {
+      //       console.log("District selection changed");
+      //       var did = $(this).val();
+      //       console.log("Data to be sent:", { did: did });
+      //       var ur = "{% url 'Guest:ajaxplace' %}"; // Replace with the actual path to your AJAX endpoint
+
+      //       $.ajax({
+      //         url: ur,
+      //         data: { did: did },
+      //         dataType: "json", // Expecting JSON data
+      //         success: function (data) {
+      //           console.log("AJAX request successful");
+      //           console.log("Data received:", data);
+      //           var options = "";
+      //           $.each(data, function (index, item) {
+      //             options +=
+      //               '<option value="' +
+      //               item.id +
+      //               '">' +
+      //               item.place_name +
+      //               "</option>";
+      //           });
+      //           $("#sel_place").html(options);
+      //         },
+      //         error: function (xhr, status, error) {
+      //           console.log("AJAX request failed:", error);
+      //         },
+      //       });
+      //     });
+      //   });
+      //
+    </script>
+  </body>
+</html>

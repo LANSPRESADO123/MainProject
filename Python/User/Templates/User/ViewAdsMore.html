@@ -1,0 +1,85 @@
+{% extends 'User/head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ ad.ad_title }}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <style>
+        .ad-image {
+            max-width: 80%;
+            height: auto;
+            
+        }
+        .reviews-section {
+            margin-top: 40px;
+        }
+        .review-card {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <!-- Ad Details -->
+                <div class="card">
+                    <img src="{{ ad.ad_image.url }}" class="card-img-top ad-image img-fluid" alt="Ad Image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ ad.ad_title }}</h5>
+                        <p class="card-text">{{ ad.ad_description }}</p>
+                        <p class="card-text"><strong>Uploaded by:</strong> 
+                            <a href="{% url 'User:merchant_profile' ad.merchant.id %}">{{ ad.merchant.merchant_name }}</a>
+                        </p>
+                    </div>
+                </div>
+                <!-- Reviews Section -->
+                <div class="reviews-section">
+                    <h3 class="mt-4">Reviews</h3>
+                    {% if reviews %}
+                        {% for review in reviews %}
+                            <div class="card review-card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><strong>{{ review.user.user_name }}</strong> - Rating: {{ review.review_rating }}</h5>
+                                    <p class="card-text">{{ review.review_content }}</p>
+                                    <p class="card-text"><small class="text-muted">Date: {{ review.review_postdate }}</small></p>
+                                    {% if request.user == review.user %}
+                                        <a href="{% url 'Merchant:delReview' review.id %}" class="btn btn-danger">Delete</a>
+                                    {% endif %}
+                                    <br>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No reviews yet.</p>
+                    {% endif %}
+                    <!-- Add Review Form -->
+                    <h3 class="mt-4">Add a Review</h3>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="rating">Rating:</label>
+                            <input type="number" name="rating" id="rating" class="form-control" min="1" max="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment">Comment:</label>
+                            <textarea name="comment" id="comment" rows="4" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Review</button>
+                        <br><br><br><br><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock content %}
